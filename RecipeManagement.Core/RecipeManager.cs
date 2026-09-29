@@ -11,7 +11,7 @@ namespace RecipeManagement.Core;
 public sealed class RecipeManager : IRecipeManager
 {
     // TODO Part A: add your private collection fields here.
-
+    private readonly List<string> names = new();
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
         // TODO Part A: validate recipes and build Dictionary<int, Recipe>.
