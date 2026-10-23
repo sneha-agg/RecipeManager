@@ -140,10 +140,17 @@ public sealed class RecipeManager : IRecipeManager
 
     // ---------------- Part B (not started) ----------------
 
-    public IReadOnlyList<Recipe> SearchByTitle(string searchText) =>
-        throw new NotImplementedException("Part B: implement SearchByTitle.");
+public IReadOnlyList<Recipe> SearchByTitle(string searchText)
+{
+    if (string.IsNullOrWhiteSpace(searchText)) return Array.Empty<Recipe>();
 
-    public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
+    var text = searchText.Trim();
+    return recipes.Values
+        .Where(r => r.Title.Contains(text, StringComparison.OrdinalIgnoreCase))
+        .OrderBy(r => r.Id)
+        .ToList()
+        .AsReadOnly();
+}       public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
         throw new NotImplementedException("Part B: implement SearchByIngredient.");
 
     public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
