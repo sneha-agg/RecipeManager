@@ -138,20 +138,30 @@ public sealed class RecipeManager : IRecipeManager
     public string? CompleteNextInstruction() =>
         pendingInstructions.TryDequeue(out var step) ? step : null;
 
-    // ---------------- Part B (not started) ----------------
+    // ---------------- Part B  ----------------
 
-public IReadOnlyList<Recipe> SearchByTitle(string searchText)
-{
-    if (string.IsNullOrWhiteSpace(searchText)) return Array.Empty<Recipe>();
+    public IReadOnlyList<Recipe> SearchByTitle(string searchText)
+    {
+        if (string.IsNullOrWhiteSpace(searchText)) return Array.Empty<Recipe>();
 
-    var text = searchText.Trim();
-    return recipes.Values
-        .Where(r => r.Title.Contains(text, StringComparison.OrdinalIgnoreCase))
-        .OrderBy(r => r.Id)
-        .ToList()
-        .AsReadOnly();
-}       public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
-        throw new NotImplementedException("Part B: implement SearchByIngredient.");
+        var text = searchText.Trim();
+        return recipes.Values
+            .Where(r => r.Title.Contains(text, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(r => r.Id)
+            .ToList()
+            .AsReadOnly();
+    }   
+    public IReadOnlyList<Recipe> SearchByIngredient(string searchText)
+    {
+        if (string.IsNullOrWhiteSpace(searchText)) return Array.Empty<Recipe>();
+
+        var text = searchText.Trim();
+        return recipes.Values
+            .Where(r => r.Ingredients.Any(i => i.Contains(text, StringComparison.OrdinalIgnoreCase)))
+            .OrderBy(r => r.Id)
+            .ToList()
+            .AsReadOnly();
+    }
 
     public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
         throw new NotImplementedException("Part B: implement GetHighestProteinRecipes.");
