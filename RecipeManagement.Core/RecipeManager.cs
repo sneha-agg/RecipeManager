@@ -186,5 +186,5 @@ public sealed class RecipeManager : IRecipeManager
 
     public bool IsRecipeSaved(int recipeId) => savedRecipes.Contains(recipeId);
     public IReadOnlyList<int> GetSavedRecipes() =>
-        throw new NotImplementedException("Part B: implement GetSavedRecipes.");
+    savedRecipes.OrderBy(id => id).ToList().AsReadOnly();
 }
