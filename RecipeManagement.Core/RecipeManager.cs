@@ -58,6 +58,7 @@ public sealed class RecipeManager : IRecipeManager
 
         // Keep the cooking plan consistent with the dictionary.
         cookingPlan.Remove(recipeId);
+        savedRecipes.Remove(recipeId);
         return true;
     }
 
